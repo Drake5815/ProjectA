@@ -1,5 +1,6 @@
 using Godot;
 using System;
+using System.Numerics;
 
 public partial class Character : Node
 {
@@ -9,6 +10,8 @@ public partial class Character : Node
     private float manaPoints;
     //Damage Indicators
     private float damage;
+
+    private CharacterBody3D characterBody3D;
 
     public Character(){}
     public Character(String name, float hitPoints, float manaPoints, float damage){
@@ -38,4 +41,34 @@ public partial class Character : Node
         get {return this.damage;}
         set {this.damage = value;}
     }
+
+    public void Movement(double delta, Godot.Vector3 Velocity, int Speed){
+
+         var direction = Godot.Vector3.Zero;
+
+         if(Input.IsActionPressed("Forward")){
+            direction.Z -= 1;
+        }
+        if (Input.IsActionPressed("Backward")){
+            direction.Z += 1;
+        }
+        if(Input.IsActionPressed("Right")){
+            direction.X += 1;
+        }
+        if(Input.IsActionPressed("Left")){
+            direction.X -= 1;
+        }
+            
+        if(direction != Godot.Vector3.Zero){
+            direction = direction.Normalized();
+            GetNode<Node3D>("Pivot").Basis = Basis.LookingAt(direction);
+        }
+
+        Velocity.X = direction.X * Speed;
+        Velocity.Z = direction.Z * Speed;
+
+        characterBody3D.MoveAndSlide();
+    }
+
+
 }
