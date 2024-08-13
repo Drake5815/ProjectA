@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://ciar6dst77qar"]
+
+[ext_resource type="PackedScene" uid="uid://8el1vbytxxd7" path="res://Assets/WorlBuilding/tileBrickB_large.gltf.glb" id="1_h32c7"]
+
+[node name="WorldTest" type="Node3D"]
+
+[node name="tileBrickB_large_gltf" parent="." instance=ExtResource("1_h32c7")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.7, 0)
